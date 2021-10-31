@@ -27,5 +27,6 @@
     array(32,23,45,78)
   );
   echo $newArray[0][2];
+  echo count($data);
 
 ?>
