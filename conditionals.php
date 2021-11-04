@@ -14,7 +14,7 @@
   // }
 
   if($num > 4 AND $num < 10) {
-    echo "5 Passed";
+    echo "5 Passed <br>";
   }
 
   /* Logical operator
@@ -22,4 +22,14 @@
     OR => ||
     xor
   */
+
+  $myColor = "RED";
+  switch($myColor) {
+    case "RED":
+      echo "Your color is red<br>";
+      break;
+    case "BLACK":
+      echo "Your color is black<br>";
+      break;
+  }
 ?>
