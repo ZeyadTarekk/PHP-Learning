@@ -24,5 +24,10 @@
     </div>
     <input type="submit" value = "Submit">
   </form>
+  <ul>
+    <li><a href="get.php?name=Zeyad">Zeyad</a></li>
+    <li><a href="get.php?name=Tarek">Tarek</a></li>
+  </ul>
+  <h1><?php echo "{$name}'s Profile"; ?></h1>
 </body>
 </html>
