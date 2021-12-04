@@ -5,15 +5,43 @@ $msgClass = '';
 if(filter_has_var(INPUT_POST,'submit')){
   // echo "Submitted";
   //get form data
-  $name = $_POST['name'];
-  $email = $_POST['email'];
-  $message = $_POST['message'];
+  $name = htmlspecialchars($_POST['name']) ;
+  $email = htmlspecialchars($_POST['email']);
+  $message = htmlspecialchars($_POST['message']);
   //check required fields
 
   if(!empty($email)&& !empty($name)&& !empty($message)){
-    echo "Passed";
-    $msg = "Submitted Successfuly";
-    $msgClass = 'alert-success';
+
+    // check Email
+    if(filter_var($email,FILTER_VALIDATE_EMAIL) === false){
+      //failed
+      $msg = 'Please Use a valid email';
+      $msgClass = 'alert-danger';
+    }
+    else {
+      //Success
+      // echo "Passed";
+      
+      $toEmail = 'zizotarek905@gmail.com';
+      $subject = 'Testing contact form'.$name;
+      $body = '<h2?>Contact Request </h2>
+              <h4>Name</h4> <p>'.$name.'</p>
+              <h4>Email</h4> <p>'.$email.'</p>
+              <h4>Message</h4> <p>'.$message.'</p>
+      ';
+      $headers = "MIME-Version 1.0"."\r\n";
+      $headers.= "Content-Type: text/html; charset=UTF-8" . "\r\n";
+      $headers.= "From: " .$name. "<".$email.">"."\r\n";
+      if(mail($toEmail,$subject,$body,$headers)){
+        $msg = "Your E-mail has been sent";
+        $msgClass = 'alert-success';
+      }
+      else {
+        $msg = "Your E-mail wasn't sent";
+        $msgClass = 'alert-danger';
+      }
+
+    }
   }
   else {
     $msg = 'Please fill in all fields';
@@ -95,6 +123,7 @@ if(filter_has_var(INPUT_POST,'submit')){
                   type="text"
                   id="email"
                   name="email"
+                  value="<?php if(!empty($email)) echo $email; ?>"
                   class="form-control"
                   placeholder="e.g. mario@example.com"
                 />
@@ -108,6 +137,7 @@ if(filter_has_var(INPUT_POST,'submit')){
                   name="name"
                   type="text"
                   id="name"
+                  value="<?php if(!empty($name)) echo $name;?>"
                   class="form-control"
                   placeholder="e.g. Mario"
                 />
@@ -119,7 +149,7 @@ if(filter_has_var(INPUT_POST,'submit')){
                   id="query"
                   style="height: 140px"
                   placeholder="query"
-                ></textarea>
+                ><?php if(!empty($message)) echo $message; ?> </textarea>
                 <label for="query">Your query...</label>
               </div>
 
