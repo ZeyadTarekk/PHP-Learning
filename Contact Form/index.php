@@ -33,8 +33,8 @@ if(filter_has_var(INPUT_POST,'submit')){
       $headers.= "Content-Type:text/html;charset=UTF-8" . "\r\n";
       $headers.= "From: " .$name;
       $headers.= '<' .$email. '>'."\r\n";
-      echo $toEmail."<br>".$subject."<br>".$headers;
-      if(mail($toEmail, $subject, $body, $headers)){
+      // echo $toEmail."<br>".$subject."<br>".$headers;
+      if(mail($toEmail, $subject, $body)){
         $msg = "Your E-mail has been sent";
         $msgClass = 'alert-success';
       }
