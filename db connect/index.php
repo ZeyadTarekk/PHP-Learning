@@ -11,8 +11,6 @@
   try {
     $connection = new PDO($dsn,$user,$pass,$option);
     // echo "Connected successfully";
-    $q = "INSERT INTO `pizzas` (`id`, `title`, `ingredients`, `email`, `created_at`) VALUES (NULL, 'pizzaa2', 'cheese2', 'z1@gm.com', current_timestamp());";
-    $connection->exec($q);
   }
   catch (PDOException $e){
     echo "failed" . $e->getMessage();
